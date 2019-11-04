@@ -6,6 +6,12 @@ public class Main {
         System.out.println(board.getPlugs());
         board.changePlug('a','f');
         System.out.println(board.getPlugs());
+        board.changePlug('s','m');
+        System.out.println(board.getPlugs());
+        board.defaultPlugs();
+        System.out.println(board.getPlugs());
+
+
 
 
     }
