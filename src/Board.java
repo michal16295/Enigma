@@ -46,5 +46,8 @@ public class Board {
         char a = plugs[convertCharToIndex(plugA)];
         plugs[convertCharToIndex(a)] = a;
     }
+    public char cipherChar(char c){
+        return plugs[convertCharToIndex(c)];
+    }
 }
 

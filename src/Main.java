@@ -10,6 +10,7 @@ public class Main {
         System.out.println(board.cipher("dima"));
         System.out.println(board.cipher("saar"));
         System.out.println(board.isPlugTaken('i'));
+        System.out.println(board.cipherChar('a'));
 
         board.setPlugs('m','a');
         System.out.println(board.getPlugs());
