@@ -25,7 +25,7 @@ public class Plug {
     public char getOutput(char input){
         if(input == plugA) return plugB;
         else if(input == plugB) return plugA;
-        return input;
+        return '-';
     }
     public void changePair(char plug){
         this.plugB = plug;

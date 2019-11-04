@@ -12,6 +12,13 @@ public class Main {
         System.out.println(board.getPlugs());
 
 
+        System.out.println( "michal->" + board.cipher("michal"));
+        System.out.println( "dima->" + board.cipher("dima"));
+        System.out.println( "saar->" + board.cipher("saar"));
+
+
+
+
 
 
     }

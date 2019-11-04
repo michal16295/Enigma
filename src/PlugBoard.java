@@ -43,6 +43,28 @@ public class PlugBoard {
     public ArrayList<Plug> getPlugs(){
         return plugs;
     }
+    public String cipher(String text){
+        String cipherText = "";
+        boolean isChar = false;
+        for(int i = 0 ; i < text.length(); i++){
+            for(Plug p: plugs){
+                if(p.getOutput(text.charAt(i)) == '-'){
+                    isChar = false;
+                    continue;
+                }
+                else {
+                    cipherText += p.getOutput(text.charAt(i));
+                    isChar = true;
+                    break;
+                }
+            }
+            if(!isChar){
+                cipherText += text.charAt(i);
+                isChar = false;
+            }
+        }
+        return cipherText;
+    }
 
     @Override
     public String toString() {
