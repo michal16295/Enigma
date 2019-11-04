@@ -1,20 +1,18 @@
 public class Main {
     public static void main(String[] args) {
 
-        PlugBoard board = new PlugBoard();
-        board.defaultPlugs();
+        Board board = new Board();
         System.out.println(board.getPlugs());
-        board.changePlug('a','f');
-        System.out.println(board.getPlugs());
-        board.changePlug('s','m');
-        System.out.println(board.getPlugs());
-        board.defaultPlugs();
+        board.defaultBoard();
         System.out.println(board.getPlugs());
 
+        System.out.println(board.cipher("michal"));
+        System.out.println(board.cipher("dima"));
+        System.out.println(board.cipher("saar"));
+        System.out.println(board.isPlugTaken('i'));
 
-        System.out.println( "michal->" + board.cipher("michal"));
-        System.out.println( "dima->" + board.cipher("dima"));
-        System.out.println( "saar->" + board.cipher("saar"));
+        board.setPlugs('m','a');
+        System.out.println(board.getPlugs());
 
 
 
