@@ -14,27 +14,9 @@ public class Main {
 
 
         Enigma enigma = new Enigma(rotor1, rotor2, rotor3, board, ref);
-        System.out.println(enigma.cipher('a'));
-        System.out.println(enigma.cipher('a'));
-        System.out.println(enigma.cipher('a'));
-        System.out.println(enigma.cipher('a'));
-        System.out.println(enigma.cipher('a'));
-        System.out.println(enigma.cipher('a'));
-        System.out.println(enigma.cipher('a'));
-        System.out.println(enigma.cipher('a'));
-        System.out.println(enigma.cipher('a'));
-        System.out.println(enigma.cipher('a'));
-        System.out.println(enigma.cipher('a'));
-        System.out.println(enigma.cipher('a'));
-        System.out.println(enigma.cipher('a'));
-        System.out.println(enigma.cipher('a'));
-        System.out.println(enigma.cipher('a'));
-        System.out.println(enigma.cipher('a'));
-        System.out.println(enigma.cipher('a'));
-        System.out.println(enigma.cipher('a'));
-        System.out.println(enigma.cipher('a'));
-        System.out.println(enigma.cipher('a'));
-        System.out.println(enigma.cipher('a'));
+        for(int i = 0 ; i < 26 ; i++){
+            System.out.println(enigma.cipher('a'));
+        }
 
 
 

@@ -27,10 +27,11 @@ public class Rotor {
     public char cipherChar(char c) {
         return rotor[(convertCharToIndex(c) + ringPosition) % 26];
     }
+
     public char cipherCharReverse(char c) {
         int i;
-        for(i = 0 ; i < rotor.length; i++){
-            if(rotor[i] == c)
+        for (i = 0; i < rotor.length; i++) {
+            if (rotor[i] == c)
                 break;
         }
         return alph.charAt(i);

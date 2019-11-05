@@ -19,21 +19,22 @@ public class Enigma {
     public char cipher(char c) {
         char newChar = c;
         rotor1.incRingPosition();
- //       if (rotor1.isNotch()) {
-  //          rotor2.incRingPosition();
-   //         if (rotor2.isNotch()) {
-   //             rotor3.incRingPosition();
-          //  }
- //       }
         newChar = plugBoard.cipherChar(c);
         newChar = rotor1.cipherChar(newChar);
- //       newChar = rotor2.cipherChar(newChar);
- //       newChar = rotor3.cipherChar(newChar);
-       newChar = reflector.cipherChar(newChar);
-  //      newChar = rotor3.cipherChar(newChar);
-  //      newChar = rotor2.cipherChar(newChar);
+        newChar = rotor2.cipherChar(newChar);
+        newChar = rotor3.cipherChar(newChar);
+        newChar = reflector.cipherChar(newChar);
+        newChar = rotor3.cipherCharReverse(newChar);
+        newChar = rotor2.cipherCharReverse(newChar);
         newChar = rotor1.cipherCharReverse(newChar);
         newChar = plugBoard.cipherChar(newChar);
+        rotor1.incRingPosition();
+        if (rotor1.isNotch() || rotor2.isNotch()) {
+            if (rotor2.isNotch()) {
+                rotor3.incRingPosition();
+            }
+            rotor2.incRingPosition();
+        }
         return newChar;
 
     }
