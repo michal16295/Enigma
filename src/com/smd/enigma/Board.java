@@ -4,7 +4,6 @@ public class Board {
     private char[] plugs;
 
     public Board() {
-        plugs = new char[26];
         String alph = "abcdefghijklmnopqrstuvwxyz";
         plugs = alph.toCharArray();
     }
@@ -40,11 +39,11 @@ public class Board {
     }
 
     public String cipher(String text) {
-        String newText = "";
+        StringBuilder newText = new StringBuilder();
         for (int i = 0; i < text.length(); i++) {
-            newText += plugs[convertCharToIndex(text.charAt(i))];
+            newText.append(plugs[convertCharToIndex(text.charAt(i))]);
         }
-        return newText;
+        return newText.toString();
     }
 
     public boolean isPlugTaken(char plug) {

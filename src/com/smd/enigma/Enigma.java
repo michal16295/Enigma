@@ -18,6 +18,12 @@ public class Enigma {
 
     public char cipher(char c) {
         char newChar = c;
+        if (rotor1.isNotch() || rotor2.isNotch()) {
+            if (rotor2.isNotch()) {
+                rotor3.incRingPosition();
+            }
+            rotor2.incRingPosition();
+        }
         rotor1.incRingPosition();
         newChar = plugBoard.cipherChar(c);
         newChar = rotor1.cipherChar(newChar);
@@ -28,13 +34,7 @@ public class Enigma {
         newChar = rotor2.cipherCharReverse(newChar);
         newChar = rotor1.cipherCharReverse(newChar);
         newChar = plugBoard.cipherChar(newChar);
-        rotor1.incRingPosition();
-        if (rotor1.isNotch() || rotor2.isNotch()) {
-            if (rotor2.isNotch()) {
-                rotor3.incRingPosition();
-            }
-            rotor2.incRingPosition();
-        }
+
         return newChar;
 
     }

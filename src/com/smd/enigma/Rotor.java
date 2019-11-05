@@ -3,6 +3,7 @@ package com.smd.enigma;
 public class Rotor {
     private final int size = 26;
     private char[] rotor;
+    private char[] rotorReverse;
     private int ringPosition;
     private int ringSetting;
     private char notch;
@@ -21,20 +22,21 @@ public class Rotor {
     }
 
     public int convertCharToIndex(char c) {
-        return (int) c - 97;
+        return (int) c - 'a';
     }
 
     public char cipherChar(char c) {
-        return rotor[(convertCharToIndex(c) + ringPosition) % 26];
+        int chcode = (convertCharToIndex(c) + getOffset() + size) % size;
+        return (char)((convertCharToIndex(rotor[chcode]) + size - getOffset()) % size + 'a');
     }
 
     public char cipherCharReverse(char c) {
-        int i;
-        for (i = 0; i < rotor.length; i++) {
-            if (rotor[i] == c)
-                break;
-        }
-        return alph.charAt(i);
+        int chcode = (convertCharToIndex(c) + getOffset() + size) % size;
+        return (char)((convertCharToIndex(rotorReverse[chcode]) + size - getOffset()) % size + 'a');
+    }
+
+    private int getOffset() {
+        return ringPosition - ringSetting;
     }
 
     public char[] getRotor() {
@@ -45,7 +47,7 @@ public class Rotor {
         switch (type) {
             case 1:
                 rotor = I.toCharArray();
-                this.notch = 'g';
+                this.notch = 'q';
                 break;
             case 2:
                 rotor = II.toCharArray();
@@ -64,6 +66,10 @@ public class Rotor {
                 this.notch = 'z';
                 break;
         }
+        this.rotorReverse = new char[this.rotor.length];
+        for (int i = 0; i < 26; i++) {
+            this.rotorReverse[(this.rotor[i] - 'a')] = (char) (i + 'a');
+        }
     }
 
     public int getRingPosition() {
@@ -75,10 +81,7 @@ public class Rotor {
     }
 
     public void incRingPosition() {
-        this.ringPosition++;
-        if (ringPosition > 25) {
-            this.ringPosition = 0;
-        }
+        ringPosition = (ringPosition + 1) % size;
     }
 
     public boolean isNotch() {
