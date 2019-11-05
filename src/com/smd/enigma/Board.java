@@ -1,25 +1,31 @@
+package com.smd.enigma;
+
 public class Board {
     private char[] plugs;
 
-    public Board(){
+    public Board() {
         plugs = new char[26];
         String alph = "abcdefghijklmnopqrstuvwxyz";
         plugs = alph.toCharArray();
     }
-    public void defaultBoard(){
+
+    public void defaultBoard() {
         String def = "swaqnpfovyuxmkclhtzj";
-        for(int i = 0 ; i < def.length(); i+=2){
-            setPlugs(def.charAt(i), def.charAt(i+1));
+        for (int i = 0; i < def.length(); i += 2) {
+            setPlugs(def.charAt(i), def.charAt(i + 1));
         }
     }
-    public int convertCharToIndex(char c){
-        return (int)c - 97;
+
+    public int convertCharToIndex(char c) {
+        return (int) c - 97;
     }
-    public char convertIdexToChar(int num){
+
+    public char convertIdexToChar(int num) {
         num += 97;
-        return (char)num;
+        return (char) num;
     }
-    public void setPlugs(char plugA, char plugB){
+
+    public void setPlugs(char plugA, char plugB) {
 
         disconnectPlugs(plugA);
         disconnectPlugs(plugB);
@@ -28,25 +34,29 @@ public class Board {
 
 
     }
-    public char[] getPlugs(){
+
+    public char[] getPlugs() {
         return plugs;
     }
-    public String cipher(String text){
+
+    public String cipher(String text) {
         String newText = "";
-        for(int i = 0 ; i < text.length(); i++){
+        for (int i = 0; i < text.length(); i++) {
             newText += plugs[convertCharToIndex(text.charAt(i))];
         }
         return newText;
     }
-    public boolean isPlugTaken(char plug){
-        if(plugs[convertCharToIndex(plug)] == plug) return false;
-        return true;
+
+    public boolean isPlugTaken(char plug) {
+        return plugs[convertCharToIndex(plug)] != plug;
     }
-    public void disconnectPlugs(char plugA){
+
+    public void disconnectPlugs(char plugA) {
         char a = plugs[convertCharToIndex(plugA)];
         plugs[convertCharToIndex(a)] = a;
     }
-    public char cipherChar(char c){
+
+    public char cipherChar(char c) {
         return plugs[convertCharToIndex(c)];
     }
 }
