@@ -8,12 +8,12 @@ public class Enigma {
     private Reflector reflector;
 
 
-    public Enigma(Rotor r1, Rotor r2, Rotor r3, Board plugBoard, Reflector reflector) {
+    public Enigma(Rotor r1, Rotor r2, Rotor r3, Board plugBoard) {
         this.rotor1 = r1;
         this.rotor2 = r2;
         this.rotor3 = r3;
         this.plugBoard = plugBoard;
-        this.reflector = reflector;
+        this.reflector = new Reflector();
     }
 
     public char cipher(char c) {
@@ -39,7 +39,16 @@ public class Enigma {
 
     }
 
-    public Rotor getRotor1() {
+    public String cipherStr(String str) {
+        String newStr = "";
+        for(int i = 0 ; i < str.length(); i++){
+            if(Character.isLetter(str.charAt(i)))
+                newStr += this.cipher(Character.toLowerCase(str.charAt(i)));
+        }
+        return newStr;
+    }
+
+        public Rotor getRotor1() {
         return rotor1;
     }
 

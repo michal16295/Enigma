@@ -14,11 +14,11 @@ public class Rotor {
     private String IV = "esovpzjayquirhxlnftgkdcmwb";
     private String V = "vzbrgityupsdnhlxawmjqofeck";
 
-    public Rotor(int type, int ringPosition, int ringSetting) {
+    public Rotor(String type, String ringPosition, String ringSetting) {
         this.rotor = new char[this.size];
         this.setRotor(type);
-        this.ringSetting = ringSetting;
-        this.ringPosition = ringPosition;
+        this.ringSetting = convertCharToIndex(Character.toLowerCase(ringSetting.toCharArray()[0]));
+        this.ringPosition = convertCharToIndex(Character.toLowerCase(ringPosition.toCharArray()[0]));
     }
 
     public int convertCharToIndex(char c) {
@@ -43,31 +43,31 @@ public class Rotor {
         return rotor;
     }
 
-    public void setRotor(int type) {
+    public void setRotor(String type) {
         switch (type) {
-            case 1:
+            case "I":
                 rotor = I.toCharArray();
                 this.notch = 'q';
                 break;
-            case 2:
+            case "II":
                 rotor = II.toCharArray();
                 this.notch = 'e';
                 break;
-            case 3:
+            case "III":
                 rotor = III.toCharArray();
                 this.notch = 'v';
                 break;
-            case 4:
+            case "IV":
                 rotor = IV.toCharArray();
                 this.notch = 'j';
                 break;
-            case 5:
+            case "V":
                 rotor = V.toCharArray();
                 this.notch = 'z';
                 break;
         }
         this.rotorReverse = new char[this.rotor.length];
-        for (int i = 0; i < 26; i++) {
+        for (int i = 0; i < this.size; i++) {
             this.rotorReverse[(this.rotor[i] - 'a')] = (char) (i + 'a');
         }
     }
@@ -92,5 +92,11 @@ public class Rotor {
         return this.ringSetting;
     }
 
+
+
+    @Override
+    public String toString() {
+        return ringPosition + " " + ringSetting + " " + rotor.toString();
+    }
 }
 

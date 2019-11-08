@@ -7,6 +7,13 @@ public class Board {
         String alph = "abcdefghijklmnopqrstuvwxyz";
         plugs = alph.toCharArray();
     }
+    public Board(String chars){
+        String alph = "abcdefghijklmnopqrstuvwxyz";
+        plugs = alph.toCharArray();
+        for (int i = 0; i < chars.length(); i += 2) {
+            setPlugs(chars.charAt(i), chars.charAt(i + 1));
+        }
+    }
 
     public void defaultBoard() {
         String def = "swaqnpfovyuxmkclhtzj";
@@ -51,8 +58,11 @@ public class Board {
     }
 
     public void disconnectPlugs(char plugA) {
-        char a = plugs[convertCharToIndex(plugA)];
-        plugs[convertCharToIndex(a)] = a;
+        if(plugs[convertCharToIndex(plugA)] != 0){
+            char a = plugs[convertCharToIndex(plugA)];
+            plugs[convertCharToIndex(a)] = a;
+        }
+
     }
 
     public char cipherChar(char c) {

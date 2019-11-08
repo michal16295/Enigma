@@ -1,27 +1,22 @@
 package com.smd.enigma;
 
-public class Main {
-    public static void main(String[] args) {
+import com.smd.enigma.Interface.MainFrame;
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.layout.StackPane;
+import javafx.stage.Stage;
 
-        Board board = new Board();
-        //board.defaultBoard();
+public class Main extends Application {
 
+    public static void main(String[] args){
 
-        Rotor rotor1 = new Rotor(3, 0, 0);
-        Rotor rotor2 = new Rotor(2, 0, 0);
-        Rotor rotor3 = new Rotor(1, 0, 0);
-        Reflector ref = new Reflector();
-
-
-        Enigma enigma = new Enigma(rotor1, rotor2, rotor3, board, ref);
-        System.out.print(enigma.cipher('e'));
-        System.out.print(enigma.cipher('n'));
-        System.out.print(enigma.cipher('i'));
-        System.out.print(enigma.cipher('g'));
-        System.out.print(enigma.cipher('m'));
-        System.out.print(enigma.cipher('a'));
-        System.out.println();
-
-
+        launch(args);
     }
+
+    @Override
+    public void start(Stage primaryStage) throws Exception {
+        MainFrame mainFrame = new MainFrame(primaryStage);
+    }
+
 }
