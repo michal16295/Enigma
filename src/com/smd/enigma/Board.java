@@ -8,10 +8,13 @@ public class Board {
         plugs = alph.toCharArray();
     }
     public Board(String chars){
+        chars = chars.replaceAll("\\s+","").toLowerCase();
         String alph = "abcdefghijklmnopqrstuvwxyz";
         plugs = alph.toCharArray();
         for (int i = 0; i < chars.length(); i += 2) {
-            setPlugs(chars.charAt(i), chars.charAt(i + 1));
+            if (i + 1 < chars.length()) {
+                setPlugs(chars.charAt(i), chars.charAt(i + 1));
+            }
         }
     }
 
@@ -32,13 +35,10 @@ public class Board {
     }
 
     public void setPlugs(char plugA, char plugB) {
-
         disconnectPlugs(plugA);
         disconnectPlugs(plugB);
         plugs[convertCharToIndex(plugA)] = plugB;
         plugs[convertCharToIndex(plugB)] = plugA;
-
-
     }
 
     public char[] getPlugs() {

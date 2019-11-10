@@ -7,17 +7,16 @@ public class Enigma {
     private Board plugBoard;
     private Reflector reflector;
 
-
     public Enigma(Rotor r1, Rotor r2, Rotor r3, Board plugBoard) {
-        this.rotor1 = r1;
+        this.rotor3 = r1;
         this.rotor2 = r2;
-        this.rotor3 = r3;
+        this.rotor1 = r3;
         this.plugBoard = plugBoard;
         this.reflector = new Reflector();
     }
 
     public char cipher(char c) {
-        char newChar = c;
+        char newChar;
         if (rotor1.isNotch() || rotor2.isNotch()) {
             if (rotor2.isNotch()) {
                 rotor3.incRingPosition();
@@ -36,19 +35,18 @@ public class Enigma {
         newChar = plugBoard.cipherChar(newChar);
 
         return newChar;
-
     }
 
     public String cipherStr(String str) {
-        String newStr = "";
+        StringBuilder newStr = new StringBuilder();
         for(int i = 0 ; i < str.length(); i++){
             if(Character.isLetter(str.charAt(i)))
-                newStr += this.cipher(Character.toLowerCase(str.charAt(i)));
+                newStr.append(this.cipher(Character.toLowerCase(str.charAt(i))));
         }
-        return newStr;
+        return newStr.toString();
     }
 
-        public Rotor getRotor1() {
+    public Rotor getRotor1() {
         return rotor1;
     }
 

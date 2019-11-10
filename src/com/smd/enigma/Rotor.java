@@ -1,5 +1,7 @@
 package com.smd.enigma;
 
+import java.util.Arrays;
+
 public class Rotor {
     private final int size = 26;
     private char[] rotor;
@@ -7,7 +9,6 @@ public class Rotor {
     private int ringPosition;
     private int ringSetting;
     private char notch;
-    private String alph = "abcdefghijklmnopqrstuvwxyz";
     private String I = "ekmflgdqvzntowyhxuspaibrcj";
     private String II = "ajdksiruxblhwtmcqgznpyfvoe";
     private String III = "bdfhjlcprtxvznyeiwgakmusqo";
@@ -92,11 +93,9 @@ public class Rotor {
         return this.ringSetting;
     }
 
-
-
     @Override
     public String toString() {
-        return ringPosition + " " + ringSetting + " " + rotor.toString();
+        return ringPosition + " " + ringSetting + " " + Arrays.toString(rotor);
     }
 }
 
