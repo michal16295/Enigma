@@ -4,6 +4,7 @@ import com.smd.enigma.Board;
 import com.smd.enigma.Enigma;
 import com.smd.enigma.Rotor;
 import javafx.collections.FXCollections;
+import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
@@ -31,6 +32,9 @@ public class MainFrame {
 
         GridPane layout = new GridPane();
         Scene scene = new Scene(layout, 750, 550);
+        layout.setPadding(new Insets(5,20,20,20));
+        layout.setVgap(5);
+        layout.setHgap(5);
         settingUI();
 
         //Rotor 1 settings
@@ -77,17 +81,17 @@ public class MainFrame {
         input.setWrapText(true);
         input.promptTextProperty().setValue("input");
         input.setOnKeyReleased(event -> encrypt());
-        layout.add(input, 4, 0);
+        layout.add(input, 2, 8);
 
         output = new TextArea();
         output.setWrapText(true);
-        layout.add(output, 4, 8);
+        layout.add(output, 2, 9);
 
         plugBoard = new TextField();
         plugBoard.setText("swaqnpfovyuxmkclhtzj");
         plugBoard.setOnKeyReleased(event -> encrypt());
 
-        layout.add(plugBoard, 4, 7);
+        layout.add(plugBoard, 2, 7);
 
         primaryStage.setScene(scene);
         primaryStage.show();
@@ -103,10 +107,26 @@ public class MainFrame {
         if (plugBoard.getText().length() > 20) {
             plugBoard.setText(plugBoard.getText().substring(0, 20));
         }
-        Board board = new Board(plugBoard.getText());
-        Enigma enigma = new Enigma(r1, r2, r3, board);
-        String s = enigma.cipherStr(input.getText());
-        output.setText(split(s));
+        boolean dup = false;
+        for(int i = 0 ; i < plugBoard.getText().length() && !dup ; i++){
+            for(int j = 1 ; j < plugBoard.getText().length(); j++){
+                if(plugBoard.getText().charAt(i) == plugBoard.getText().charAt(j)){
+                    dup = true;
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setTitle("ERROR");
+                    alert.setContentText("Cant use the same char twice");
+                    alert.showAndWait();
+                    break;
+                }
+            }
+        }
+        if(!dup){
+            Board board = new Board(plugBoard.getText());
+            Enigma enigma = new Enigma(r1, r2, r3, board);
+            String s = enigma.cipherStr(input.getText());
+            plugBoard.promptTextProperty().setValue(board.toString());
+            output.setText(split(s));
+        }
     }
 
     private String split(String s) {

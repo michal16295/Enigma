@@ -11,9 +11,11 @@ public class Board {
         chars = chars.replaceAll("\\s+","").toLowerCase();
         String alph = "abcdefghijklmnopqrstuvwxyz";
         plugs = alph.toCharArray();
-        for (int i = 0; i < chars.length(); i += 2) {
-            if (i + 1 < chars.length()) {
-                setPlugs(chars.charAt(i), chars.charAt(i + 1));
+        if(chars != ""){
+            for (int i = 0; i < chars.length(); i += 2) {
+                if (i + 1 < chars.length()) {
+                    setPlugs(chars.charAt(i), chars.charAt(i + 1));
+                }
             }
         }
     }
@@ -67,6 +69,12 @@ public class Board {
 
     public char cipherChar(char c) {
         return plugs[convertCharToIndex(c)];
+    }
+
+    @Override
+    public String toString() {
+        String str = String.copyValueOf(plugs);
+        return str;
     }
 }
 
