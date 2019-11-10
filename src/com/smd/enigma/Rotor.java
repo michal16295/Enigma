@@ -16,7 +16,6 @@ public class Rotor {
     private String V = "vzbrgityupsdnhlxawmjqofeck";
 
     public Rotor(String type, String ringPosition, String ringSetting) {
-        this.rotor = new char[this.size];
         this.setRotor(type);
         this.ringSetting = convertCharToIndex(Character.toLowerCase(ringSetting.toCharArray()[0]));
         this.ringPosition = convertCharToIndex(Character.toLowerCase(ringPosition.toCharArray()[0]));
