@@ -107,25 +107,24 @@ public class MainFrame {
         if (plugBoard.getText().length() > 20) {
             plugBoard.setText(plugBoard.getText().substring(0, 20));
         }
-        boolean dup = false;
-        for(int i = 0 ; i < plugBoard.getText().length() && !dup ; i++){
-            for(int j = 1 ; j < plugBoard.getText().length(); j++){
-                if(plugBoard.getText().charAt(i) == plugBoard.getText().charAt(j)){
-                    dup = true;
-                    Alert alert = new Alert(Alert.AlertType.ERROR);
-                    alert.setTitle("ERROR");
-                    alert.setContentText("Cant use the same char twice");
-                    alert.showAndWait();
-                    break;
-                }
-            }
-        }
-        if(!dup){
+        try {
             Board board = new Board(plugBoard.getText());
             Enigma enigma = new Enigma(r1, r2, r3, board);
             String s = enigma.cipherStr(input.getText());
             plugBoard.promptTextProperty().setValue(board.toString());
             output.setText(split(s));
+        } catch (IllegalArgumentException e) {
+            e.printStackTrace();
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("ERROR");
+            alert.setContentText("Plug can not connect to itself");
+            alert.showAndWait();
+        } catch (Exception e) {
+            e.printStackTrace();
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("ERROR");
+            alert.setContentText("Can't use the same char twice");
+            alert.showAndWait();
         }
     }
 

@@ -7,12 +7,18 @@ public class Board {
         String alph = "abcdefghijklmnopqrstuvwxyz";
         plugs = alph.toCharArray();
     }
-    public Board(String chars){
-        chars = chars.replaceAll("\\s+","").toLowerCase();
+
+    public Board(String chars) throws Exception {
+        chars = chars.replaceAll("\\s+", "").toLowerCase();
         String alph = "abcdefghijklmnopqrstuvwxyz";
         plugs = alph.toCharArray();
-        if(chars != ""){
-            for (int i = 0; i < chars.length(); i += 2) {
+        if (!chars.equals("")) {
+            for (int i = 0; i + 1 < chars.length(); i += 2) {
+                if (isPlugTaken(chars.charAt(i)) || isPlugTaken(chars.charAt(i + 1))) {
+                    throw new Exception("Plug already taken");
+                } else if (chars.charAt(i) == chars.charAt(i + 1)) {
+                    throw new IllegalArgumentException("Same character plug");
+                }
                 if (i + 1 < chars.length()) {
                     setPlugs(chars.charAt(i), chars.charAt(i + 1));
                 }
@@ -60,7 +66,7 @@ public class Board {
     }
 
     public void disconnectPlugs(char plugA) {
-        if(plugs[convertCharToIndex(plugA)] != 0){
+        if (plugs[convertCharToIndex(plugA)] != 0) {
             char a = plugs[convertCharToIndex(plugA)];
             plugs[convertCharToIndex(a)] = a;
         }
@@ -73,8 +79,7 @@ public class Board {
 
     @Override
     public String toString() {
-        String str = String.copyValueOf(plugs);
-        return str;
+        return String.copyValueOf(plugs);
     }
 }
 
