@@ -104,8 +104,9 @@ public class MainFrame {
         Rotor r1 = new Rotor(rotor1.getValue(), positionRotor1.getValue(), ringSetting1.getValue());
         Rotor r2 = new Rotor(rotor2.getValue(), positionRotor2.getValue(), ringSetting2.getValue());
         Rotor r3 = new Rotor(rotor3.getValue(), positionRotor3.getValue(), ringSetting3.getValue());
-        if (plugBoard.getText().length() > 20) {
-            plugBoard.setText(plugBoard.getText().substring(0, 20));
+        String plugs = plugBoard.getText().trim().replaceAll(" ", "");
+        if (plugs.length() > 20) {
+            plugBoard.setText(plugs.substring(0, 20));
         }
         try {
             Board board = new Board(plugBoard.getText());
