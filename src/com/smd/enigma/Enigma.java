@@ -8,30 +8,29 @@ public class Enigma {
     private Reflector reflector;
 
     public Enigma(Rotor r1, Rotor r2, Rotor r3, Board plugBoard) {
-        this.rotor3 = r1;
+        this.rotor1 = r1;
         this.rotor2 = r2;
-        this.rotor1 = r3;
+        this.rotor3 = r3;
         this.plugBoard = plugBoard;
         this.reflector = new Reflector();
     }
 
     public char cipher(char c) {
-        char newChar;
-        if (rotor1.isNotch() || rotor2.isNotch()) {
+        if (rotor2.isNotch() || rotor3.isNotch()) {
             if (rotor2.isNotch()) {
-                rotor3.incRingPosition();
+                rotor1.incRingPosition();
             }
             rotor2.incRingPosition();
         }
-        rotor1.incRingPosition();
-        newChar = plugBoard.cipherChar(c);
-        newChar = rotor1.cipherChar(newChar);
-        newChar = rotor2.cipherChar(newChar);
+        rotor3.incRingPosition();
+        char newChar = plugBoard.cipherChar(c);
         newChar = rotor3.cipherChar(newChar);
+        newChar = rotor2.cipherChar(newChar);
+        newChar = rotor1.cipherChar(newChar);
         newChar = reflector.cipherChar(newChar);
-        newChar = rotor3.cipherCharReverse(newChar);
-        newChar = rotor2.cipherCharReverse(newChar);
         newChar = rotor1.cipherCharReverse(newChar);
+        newChar = rotor2.cipherCharReverse(newChar);
+        newChar = rotor3.cipherCharReverse(newChar);
         newChar = plugBoard.cipherChar(newChar);
 
         return newChar;

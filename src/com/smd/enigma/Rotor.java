@@ -9,20 +9,24 @@ public class Rotor {
     private int ringPosition;
     private int ringSetting;
     private char notch;
+    private char[] alphabet= "abcdefghijklmnopqrstuvwxyz".toCharArray();
     private String I = "ekmflgdqvzntowyhxuspaibrcj";
     private String II = "ajdksiruxblhwtmcqgznpyfvoe";
     private String III = "bdfhjlcprtxvznyeiwgakmusqo";
     private String IV = "esovpzjayquirhxlnftgkdcmwb";
     private String V = "vzbrgityupsdnhlxawmjqofeck";
 
-    public Rotor(String type, String ringPosition, String ringSetting) {
+    public Rotor(String type, char ringPosition, char ringSetting) {
         this.setRotor(type);
-        this.ringSetting = convertCharToIndex(Character.toLowerCase(ringSetting.toCharArray()[0]));
-        this.ringPosition = convertCharToIndex(Character.toLowerCase(ringPosition.toCharArray()[0]));
+        this.ringSetting = convertCharToIndex(ringSetting);
+        this.ringPosition = convertCharToIndex(ringPosition);
     }
 
     public int convertCharToIndex(char c) {
-        return (int) c - 'a';
+        if (c >= 'a' && c <= 'z') {
+            return (int) c - 'a';
+        }
+        return (int) c - 'A';
     }
 
     public char cipherChar(char c) {
@@ -85,7 +89,7 @@ public class Rotor {
     }
 
     public boolean isNotch() {
-        return rotor[this.ringPosition] == this.notch;
+        return alphabet[this.ringPosition] == this.notch;
     }
 
     public int getRingSetting() {
