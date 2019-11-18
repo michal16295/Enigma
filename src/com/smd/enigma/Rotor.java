@@ -16,6 +16,12 @@ public class Rotor {
     private String IV = "esovpzjayquirhxlnftgkdcmwb";
     private String V = "vzbrgityupsdnhlxawmjqofeck";
 
+    private String RI = "uwygadfpvzbeckmthxslrinqoj";
+    private String RII = "ajpczwrlfbdkotyuqgenhxmivs";
+    private String RIII = "tagbpcsdqeufvnzhyixjwlrkom";
+    private String RIV = "hzwvartnlgupxqcejmbskdyoif";
+    private String RV = "qcylxwenftzosmvjudkgiarphb";
+
     public Rotor(String type, char ringPosition, char ringSetting) {
         this.setRotor(type);
         this.ringSetting = convertCharToIndex(ringSetting);
@@ -30,13 +36,15 @@ public class Rotor {
     }
 
     public char cipherChar(char c) {
-        int chcode = (convertCharToIndex(c) + getOffset() + size) % size;
-        return (char)((convertCharToIndex(rotor[chcode]) + size - getOffset()) % size + 'a');
+        int offset = getOffset();
+        int chcode = (convertCharToIndex(c) + offset + size) % size;
+        return (char)((convertCharToIndex(rotor[chcode]) + size - offset) % size + 'a');
     }
 
     public char cipherCharReverse(char c) {
-        int chcode = (convertCharToIndex(c) + getOffset() + size) % size;
-        return (char)((convertCharToIndex(rotorReverse[chcode]) + size - getOffset()) % size + 'a');
+        int offset = getOffset();
+        int chcode = (convertCharToIndex(c) + offset + size) % size;
+        return (char)((convertCharToIndex(rotorReverse[chcode]) + size - offset) % size + 'a');
     }
 
     private int getOffset() {
@@ -51,28 +59,29 @@ public class Rotor {
         switch (type) {
             case "I":
                 rotor = I.toCharArray();
+                rotorReverse = RI.toCharArray();
                 this.notch = 'q';
                 break;
             case "II":
                 rotor = II.toCharArray();
+                rotorReverse = RII.toCharArray();
                 this.notch = 'e';
                 break;
             case "III":
                 rotor = III.toCharArray();
+                rotorReverse = RIII.toCharArray();
                 this.notch = 'v';
                 break;
             case "IV":
                 rotor = IV.toCharArray();
+                rotorReverse = RIV.toCharArray();
                 this.notch = 'j';
                 break;
             case "V":
                 rotor = V.toCharArray();
+                rotorReverse = RV.toCharArray();
                 this.notch = 'z';
                 break;
-        }
-        this.rotorReverse = new char[this.rotor.length];
-        for (int i = 0; i < this.size; i++) {
-            this.rotorReverse[(this.rotor[i] - 'a')] = (char) (i + 'a');
         }
     }
 
@@ -99,6 +108,10 @@ public class Rotor {
     @Override
     public String toString() {
         return ringPosition + " " + ringSetting + " " + Arrays.toString(rotor);
+    }
+
+    public void setRingSettings(int ringSettings) {
+        this.ringSetting = ringSettings;
     }
 }
 

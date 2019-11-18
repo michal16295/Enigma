@@ -9,6 +9,10 @@ public class Board {
     }
 
     public Board(String chars) throws Exception {
+        setBoard(chars);
+    }
+
+    public void setBoard(String chars) throws Exception {
         chars = chars.replaceAll("\\s+", "").toLowerCase();
         String alph = "abcdefghijklmnopqrstuvwxyz";
         plugs = alph.toCharArray();
